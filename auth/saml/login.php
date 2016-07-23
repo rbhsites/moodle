@@ -81,51 +81,77 @@ echo '<center>';
         echo '</div>';
     }
 ?>
-if (in_array('saml', $authsequence)){
-    if (isset($saml_config->samllogoinfo)) {
-        echo "<div class='desc'>$saml_config->samllogoinfo</div>";
-    }
-    if (isset($saml_config->samllogoimage) && $saml_config->samllogoimage != NULL) {
-        echo '<a href="' . $samlUrl . '"><img src="'.$saml_config->samllogoimage.'" border="0" alt="SAML login" ></a>';
-    }
-}
-echo '</center>';
-
-?>
-      <div class="subcontent loginsub">
-        <div class="desc">
-          <?php
-            print_string("auth_saml_loginusing", "auth_saml");
-            echo '<br/>';
-            echo '('.get_string("cookiesenabled").')';
-            echo $OUTPUT->help_icon('cookiesenabled');
-           ?>
-        </div>
+<div class="acc-container">
+	<div class="acc-btn"><h3 class="selected"><?php print_string("auth_saml_netid_login_header", "auth_saml"); ?></h3></div>
+		<div class="acc-content open">
+		  <div class="acc-content-inner">
+			<p>
+			    <?php
+                    if (in_array('saml', $authsequence)){
+                        if (isset($saml_config->samllogoinfo)) {
+                            echo "<div class='desc'>$saml_config->samllogoinfo</div>";
+                        }
+                        if (isset($saml_config->samllogoimage) && $saml_config->samllogoimage != NULL) {
+                            echo '<a href="' . $samlUrl . '"><img src="'.$saml_config->samllogoimage.'" border="0" alt="SAML login" ></a>';
+                        }
+                        $netidpasswordreseturl = get_string("auth_saml_netid_forgotpassword_url", "auth_saml");
+					    echo '<p><div class="forgetpass"><a href="' . $netidpasswordreseturl . '" target="_new">Problems with your NetID or password?<br />Reset or activate your NetID here.</a></div></p>';
+                    }
+                ?>
+            </p>
+		  </div>
+		</div>
+	
+	<div class="acc-btn"><h3><?php print_string("auth_saml_manual_login_header", "auth_saml"); ?></h3></div>
+		<div class="acc-content">
+		  <div class="acc-content-inner">
+			<p>
+              <div class="subcontent loginsub">
+                <div class="desc">
+                  <?php
+                    print_string("auth_saml_loginusing", "auth_saml");
+                    echo '<br/>';
+                    echo '('.get_string("cookiesenabled").')';
+                    echo $OUTPUT->help_icon('cookiesenabled');
+                   ?>
+                </div>
 
         <form action="<?php echo $CFG->httpswwwroot; ?>/login/index.php" method="post" id="login" <?php echo $autocomplete; ?> >
           <div class="loginform">
-            <div class="form-label"><label for="username"><?php print_string("username") ?></label></div>
-            <div class="form-input">
-              <input type="text" name="username" id="username" size="15" value="<?php echo isset($frm->username)? $frm->username: ''; ?>" />
-            </div>
-            <div class="clearer"><!-- --></div>
-            <div class="form-label"><label for="password"><?php print_string("password") ?></label></div>
-            <div class="form-input">
-              <input type="password" name="password" id="password" size="15" value="" <?php echo $autocomplete; ?> />
-              <input type="submit" id="loginbtn" value="<?php print_string("login") ?>" />
-            </div>
-          </div>
-            <div class="clearer"><!-- --></div>
-              <?php if (isset($CFG->rememberusername) and $CFG->rememberusername == 2) { ?>
-              <div class="rememberpass">
-                  <input type="checkbox" name="rememberusername" id="rememberusername" value="1" <?php if (isset($frm->username)) {echo 'checked="checked"';} ?> />
-                  <label for="rememberusername"><?php print_string('rememberusername', 'admin') ?></label>
+                <div class="desc" style="text-align:center; margin-bottom:15px;">
+                  <?php
+                    print_string("auth_saml_loginusing", "auth_saml");
+                   ?>
+                </div>
+                <div class="form-label"><label for="username"><?php print_string("username") ?></label></div>
+                <div class="form-input">
+                  <input type="text" name="username" id="username" size="15" value="<?php echo isset($frm->username)? $frm->username: ''; ?>" />
+                </div>
+                <div class="clearer"><!-- --></div>
+                <div class="form-label"><label for="password"><?php print_string("password") ?></label></div>
+                <div class="form-input">
+                  <input type="password" name="password" id="password" size="15" value="" <?php echo $autocomplete; ?> />
+                  <input type="submit" id="loginbtn" value="<?php print_string("login") ?>" />
+                </div>
               </div>
-              <?php } ?>
-          <div class="clearer"><!-- --></div>
-          <div class="forgetpass"><a href="<?php echo $CFG->httpswwwroot; ?>/login/forgot_password.php"><?php print_string("forgotten") ?></a></div>
-        </form>
-      </div>
+                <div class="clearer"><!-- --></div>
+                  <?php if (isset($CFG->rememberusername) and $CFG->rememberusername == 2) { ?>
+                  <div class="rememberpass">
+                      <input type="checkbox" name="rememberusername" id="rememberusername" value="1" <?php if (isset($frm->username)) {echo 'checked="checked"';} ?> />
+                      <label for="rememberusername"><?php print_string('rememberusername', 'admin') ?></label>
+                  </div>
+                  <?php } ?>
+              <div class="clearer"><!-- --></div>
+              <div class="forgetpass"><a href="<?php echo $CFG->httpswwwroot; ?>/login/forgot_password.php"><?php print_string("forgotten") ?></a></div>
+            </form>
+            </div>
+            </p>
+		  </div>
+		</div>
+</div>
+<?php
+echo '</center>';
+?>
 
 <?php if ($CFG->guestloginbutton and !isguestuser()) {  ?>
       <div class="subcontent guestsub">
