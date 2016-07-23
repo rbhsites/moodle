@@ -34,9 +34,10 @@ $login   = optional_param('loginpage', 0, PARAM_BOOL);
 
 // can be overridden by auth plugins
 if ($login) {
-    $redirect = get_login_url();
+    //$redirect = get_login_url();
+    $redirect = 'http://rutgersmoodle28dev.yourmoodle.com/login/logout.html';
 } else {
-    $redirect = $CFG->wwwroot.'/';
+    $redirect = $CFG->wwwroot.'/login/logout.html';
 }
 
 if (!isloggedin()) {
@@ -48,17 +49,18 @@ if (!isloggedin()) {
     $PAGE->set_title($SITE->fullname);
     $PAGE->set_heading($SITE->fullname);
     echo $OUTPUT->header();
-    echo $OUTPUT->confirm(get_string('logoutconfirm'), new moodle_url($PAGE->url, array('sesskey'=>sesskey())), $CFG->wwwroot.'/');
+    //echo $OUTPUT->confirm(get_string('logoutconfirm'), new moodle_url($PAGE->url, array('sesskey'=>sesskey())), $CFG->wwwroot.'/');
+    echo $OUTPUT->confirm(get_string('logoutconfirm'), new moodle_url($PAGE->url, array('sesskey'=>sesskey())), $CFG->wwwroot.'/login/logout.html');
     echo $OUTPUT->footer();
     die;
 }
-
+/*
 $authsequence = get_enabled_auth_plugins(); // auths, in sequence
 foreach($authsequence as $authname) {
     $authplugin = get_auth_plugin($authname);
     $authplugin->logoutpage_hook();
 }
-
+*/
 require_logout();
 
 redirect($redirect);
