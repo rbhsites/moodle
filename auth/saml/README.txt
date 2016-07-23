@@ -9,6 +9,9 @@ Changes:
                tightened up the session switching between ss and moodle
                Piers Harding <piers@catalyst.net.nz>
 - 2010-11    : Rewrited by Yaco Sistemas.
+- 2016-07-22 : added accordion to UI for login area to provide SAML Login (via NetID login at Rutgers CAS) separate from the Manual Login              form. Included separate password reset URL for SAML Login section, customizable via Language strings.
+               Also added customizable strings for according tab headings for the SAML Login section and the Manual Login section.
+               Sarah Ashley <ashleysa@oit.rutgers.edu>
 
 Requirements:
 - SimpleSAML (http://rnd.feide.no/simplesamlphp). Tested with version > 1.7
