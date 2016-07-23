@@ -120,3 +120,6 @@ $string['pluginname'] = 'SAML Authentication';
 $string['pluginnotenabled'] = 'Plugin not enabled!';
 $string['syncfromnotenabled'] = 'No external plugin selected. SAML cannot synchronize users on its own.';
 $string['unknownplugin'] = 'SAML does not know how to invoke the sync_users method of the specified plugin: ';
+$string['auth_saml_netid_forgotpassword_url'] = 'https://netid.rutgers.edu/displayForgottenPasswordForm.htm';
+$string['auth_saml_netid_login_header'] = 'I Have a NetID';
+$string['auth_saml_manual_login_header'] = 'I Do Not Have a NetID';
