@@ -73,7 +73,14 @@ $authsequence = get_enabled_auth_plugins(true);
 $frm = data_submitted();
 
 echo '<center>';
-
+?>
+<?php
+    if (!empty($errormsg)) {
+        echo '<div class="loginerrors">';
+        echo $OUTPUT->error_text($errormsg);
+        echo '</div>';
+    }
+?>
 if (in_array('saml', $authsequence)){
     if (isset($saml_config->samllogoinfo)) {
         echo "<div class='desc'>$saml_config->samllogoinfo</div>";
@@ -94,13 +101,7 @@ echo '</center>';
             echo $OUTPUT->help_icon('cookiesenabled');
            ?>
         </div>
-        <?php
-          if (!empty($errormsg)) {
-              echo '<div class="loginerrors">';
-              echo $OUTPUT->error_text($errormsg);
-              echo '</div>';
-          }
-        ?>
+
         <form action="<?php echo $CFG->httpswwwroot; ?>/login/index.php" method="post" id="login" <?php echo $autocomplete; ?> >
           <div class="loginform">
             <div class="form-label"><label for="username"><?php print_string("username") ?></label></div>
